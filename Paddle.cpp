@@ -98,10 +98,7 @@ void Paddle::Update(float DeltaTime)
 		}
 	}
 
-	if (glfwGetKey(GLFW_KEY_ESC))
-	{
-		glfwCloseWindow();
-	}
+	
 
 }
 

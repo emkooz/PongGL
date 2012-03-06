@@ -2,6 +2,8 @@
 #include <iostream>
 #include "ball.h"
 #include "Paddle.h"
+#include "Menu.h"
+#include "Score.h"
 
 static unsigned int Width = 800;
 static unsigned int Height = 600;
@@ -24,24 +26,59 @@ int main()
 
 	glClearColor(0,0,1,1);
 
+	NMenu::CMenu Menu;
+
+	CScore score;
+
 	Npad::SetScreen(Width , Height);
 	Nball::SetScreen(Width, Height);
 
 	Nball::Ball ball;
 	Npad::SetCollisions(&ball);
+	ball.SetScore(&score);
 
 	Npad::Paddle Player(Height - 20 , 60);
 	Npad::Paddle Enemy(20 , 60);
 
 	Player.SetControl();
 
-	float LastTime = glfwGetTime();
-
+	
+	float LastTime = glfwGetTime(); // (for deltatime)
+	
+	bool EscPressed = false; // thanks naelstrof
+	bool EscReleased = true;
 	while (true)
 	{
-		float DeltaTime = glfwGetTime() - LastTime;
-		LastTime = glfwGetTime();
+		float DeltaTime = glfwGetTime() - LastTime; // Deltatime init
+		LastTime = glfwGetTime(); // update for deltatime
 
+		if (glfwGetKey(GLFW_KEY_ESC) && EscReleased  && !EscPressed)
+		{
+			EscReleased = false;
+			EscPressed = true;
+		}
+		
+
+		if (EscPressed && !EscReleased) // if they press escape
+		{
+			if (Menu.State == "Playing") //if the state is playing
+			{
+				Menu.State = "Paused"; // change it to paused
+				std::cout <<"\n\n-----PAUSED-----\n\n";
+			}
+
+			else if (Menu.State == "Paused") // else if the state is paused
+				Menu.State = "Playing"; // change it to playing
+	
+			EscPressed = false;
+		}
+
+		if (!glfwGetKey(GLFW_KEY_ESC))
+		{
+			EscPressed = false;
+			EscReleased = true;
+		}
+		
 
 		if (!glfwGetWindowParam(GLFW_OPENED))
 		{
@@ -49,14 +86,16 @@ int main()
 			exit(0);
 		}
 
+		if (Menu.State == "Playing") // if the state is playing update everything
+		{
 		ball.Update (DeltaTime);
-		Player.Update (DeltaTime);
+		Player.Update (DeltaTime); // update everything
 		Enemy.Update (DeltaTime);
-
+		}
 		glClear(GL_COLOR_BUFFER_BIT);
 
 		ball.Draw();
-		Player.Draw();
+		Player.Draw(); // draws
 		Enemy.Draw();
 
 		glfwSwapBuffers();

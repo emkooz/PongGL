@@ -58,6 +58,23 @@ void Ball::Update(float DeltaTime)
         x = 20;
         vx *= -1;
     }
+
+	 if (y - 20 <= 0) // check if it hit the top, if it did add a point for the AI and revert it back to the middle.
+	 {
+		 Score->p1Add();
+		 Score->Display(); // display the new score.
+		 x = Width/2;
+		 y = Height/2;
+	 }
+
+	 if (y + 20 >= Height)
+	 {
+		 Score->aiAdd();
+		 Score->Display();
+		 x = Width/2;
+		 y = Height/2;
+	 }
+
     x += vx*DeltaTime;
     y += vy*DeltaTime;
 	
@@ -67,4 +84,9 @@ void Nball::SetScreen(unsigned int w, unsigned int h)
 {
 	Width = w;
 	Height = h;
+}
+
+void Ball::SetScore(CScore* foo)
+{
+	Score = foo;
 }
