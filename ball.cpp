@@ -1,9 +1,18 @@
 #include "ball.h"
+#include <SOIL.h>
 
 using namespace Nball;
 
 Ball::Ball()
 {
+	GLuint BallImg = SOIL_load_OGL_texture
+	(
+		"img/ball.png",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+	);
+
 	x = Width/2;
 	y = Height/2;
 	vx = 50;
@@ -14,12 +23,25 @@ void Ball::Draw()
 {
 	glPushMatrix();
 	glTranslatef(x,y,0);
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(BallImg , GL_TEXTURE_2D);
+
 	glBegin(GL_QUADS);
+		
 	glVertex2f(-20,-20);
+	glTexCoord2f(0,0);
+
 	glVertex2f(20,-20);
+	glTexCoord2f(0,1);
+
 	glVertex2f(20,20);
+	glTexCoord2f(1,1);
+
 	glVertex2f(-20,20);
+	glTexCoord2f(0,1);
+
 	glEnd();
+	glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 }
 

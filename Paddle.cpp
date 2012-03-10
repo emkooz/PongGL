@@ -1,14 +1,28 @@
 #include "Paddle.h"
+#include <SOIL.h>
+
+
 
 using namespace Npad;
 
 Paddle::Paddle(float Y , float W)
 {
+	GLuint PadImg = SOIL_load_OGL_texture
+	(
+		"img/pad.png",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+	);
+
+
 	x = Width/2;
 	vx = 0;
 	y = Y;
 	w = W;
 	IsControlled = false;
+
+
 }
 
 void Paddle::SetControl()
@@ -20,18 +34,35 @@ void Paddle::Draw()
 {
 	glPushMatrix();
 	glTranslatef(x,y,0);
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(PadImg , GL_TEXTURE_2D);
 	glBegin(GL_QUADS);
-			glColor3f(1.0f , 1.0f , 0.0f);
+
+		
+		
+
+	//		glColor3f(1.0f , 1.0f , 0.0f);
 		glVertex2f(-w,-10);
 		 	
+			glTexCoord2f(0,0);
+
 		glVertex2f(w,-10);
-		glColor3f(18.0f, 1.0f, 1.0f);
+	//	glColor3f(18.0f, 1.0f, 1.0f);
+			glTexCoord2f(1,0);
+
 		glVertex2f(w,10);
 	
-		glVertex2f(-w,10);
-		glColor3f(0.0f , 0.0f , 0.0f);
+			glTexCoord2f(1,1);
 
+		glVertex2f(-w,10);
+
+		glTexCoord2f(0,1);
+		//glColor3f(0.0f , 0.0f , 0.0f);
+
+
+	
 	glEnd();
+	glDisable(GL_TEXTURE_2D);
 	glPopMatrix();
 }
 

@@ -15,6 +15,8 @@ namespace Nball
 	public:
 		float x, y, vx , vy;
 		CScore* Score;
+
+		GLuint BallImg;
 	
 		Ball();
 		void Draw();

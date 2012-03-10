@@ -15,6 +15,10 @@ namespace Npad
 class Paddle
 {
 public:
+
+	GLuint PadImg;
+
+
 	bool IsControlled;
 	void SetControl();
 
