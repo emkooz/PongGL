@@ -23,25 +23,32 @@ void Ball::Draw()
 {
 	glPushMatrix();
 	glTranslatef(x,y,0);
+
+	glEnable(GL_BLEND);
+	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+
+
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(BallImg , GL_TEXTURE_2D); std::cout << "\nBallIm TexID:" << BallImg;
+	glBindTexture(GL_TEXTURE_2D , BallImg); std::cout << "\nBallIm TexID:" << BallImg;
 
 	glBegin(GL_QUADS);
 		
-		glVertex2f(-20,-20);
 		glTexCoord2f(0,0);
-
+		glVertex2f(-20,-20);
+		
+		glTexCoord2f(1,0);
 		glVertex2f(20,-20);
-		glTexCoord2f(0,1);
-	
-		glVertex2f(20,20);
+		
 		glTexCoord2f(1,1);
-
-		glVertex2f(-20,20);
+		glVertex2f(20,20);
+		
 		glTexCoord2f(0,1);
+		glVertex2f(-20,20);
+		
 
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
+	glDisable(GL_BLEND);
 	glPopMatrix();
 }
 

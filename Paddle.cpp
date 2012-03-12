@@ -35,20 +35,21 @@ void Paddle::Draw()
 	glPushMatrix();
 	glTranslatef(x,y,0);
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(PadImg , GL_TEXTURE_2D); std::cout << "\nPadImg TexID:" << PadImg;
+	glBindTexture(GL_TEXTURE_2D , PadImg); std::cout << "\nPadImg TexID:" << PadImg;
 	glBegin(GL_QUADS);
 
-		glVertex2f(-w,-10);
 		glTexCoord2f(0,0);
-
-		glVertex2f(w,-10);
+		glVertex2f(-w,-10);
+		
 		glTexCoord2f(1,0);
-
+		glVertex2f(w,-10);
+		
+		glTexCoord2f(1,1);
 		glVertex2f(w,10);
-        glTexCoord2f(1,1);
-
-		glVertex2f(-w,10);
+        
 		glTexCoord2f(0,1);
+		glVertex2f(-w,10);
+		
 		
 	
 	glEnd();
