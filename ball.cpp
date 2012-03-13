@@ -29,7 +29,7 @@ void Ball::Draw()
 
 
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D , BallImg); std::cout << "\nBallIm TexID:" << BallImg;
+	glBindTexture(GL_TEXTURE_2D , BallImg); 
 
 	glBegin(GL_QUADS);
 		
@@ -56,24 +56,24 @@ void Ball::Update(float DeltaTime)
 {
 	if (glfwGetKey(GLFW_KEY_KP_8)) //go up!
 	{
-		vy -= 500 * DeltaTime;
+		vy -= 1000 * DeltaTime;
 
 	}
 
 	if (glfwGetKey(GLFW_KEY_KP_5)) // go down!
 	{
-		vy += 500 * DeltaTime;
+		vy += 1000 * DeltaTime;
 		
 	}
 
 	if (glfwGetKey(GLFW_KEY_KP_4)) // go left!
 	{
-		vx -= 500 * DeltaTime;
+		vx -= 1000 * DeltaTime;
 	}
 
 	if (glfwGetKey(GLFW_KEY_KP_6)) //go right!
 	{
-		vx += 500 * DeltaTime;
+		vx += 1000 * DeltaTime;
 	}
 
 	 if (x+20>Width)

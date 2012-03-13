@@ -1,9 +1,12 @@
 #include <glfw.h>
 #include <iostream>
+#include <irrKlang.h>
 #include "ball.h"
 #include "Paddle.h"
 #include "Menu.h"
 #include "Score.h"
+
+using namespace irrklang;
 
 static unsigned int Width = 800;
 static unsigned int Height = 600;
@@ -26,6 +29,11 @@ int main()
 
 	glClearColor(0,0,1,1);
 
+	// start the sound engine with default parameters
+   ISoundEngine* sound = createIrrKlangDevice();
+		if (!sound)
+			return 0;
+
 	NMenu::CMenu Menu;
 
 	CScore score;
@@ -45,10 +53,15 @@ int main()
 	
 	float LastTime = glfwGetTime(); // (for deltatime)
 	
+	
+	sound->play2D("sounds/song.mp3" , true);
+
 	bool EscPressed = false; // thanks naelstrof
 	bool EscReleased = true;
 	while (true)
 	{
+		
+
 		float DeltaTime = glfwGetTime() - LastTime; // Deltatime init
 		LastTime = glfwGetTime(); // update for deltatime
 
@@ -101,5 +114,6 @@ int main()
 		glfwSwapBuffers();
 	}
 
+	sound->drop();
 	return 0;
 }

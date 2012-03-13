@@ -1,8 +1,10 @@
 #include "Paddle.h"
 #include <SOIL.h>
+#include <irrKlang.h>
 
 
 
+using namespace irrklang;
 using namespace Npad;
 
 Paddle::Paddle(float Y , float W)
@@ -35,7 +37,7 @@ void Paddle::Draw()
 	glPushMatrix();
 	glTranslatef(x,y,0);
 	glEnable(GL_TEXTURE_2D);
-	glBindTexture(GL_TEXTURE_2D , PadImg); std::cout << "\nPadImg TexID:" << PadImg;
+	glBindTexture(GL_TEXTURE_2D , PadImg); 
 	glBegin(GL_QUADS);
 
 		glTexCoord2f(0,0);
