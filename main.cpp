@@ -20,7 +20,7 @@ int main()
 	}
 
 	glfwOpenWindow(Width,Height,0,0,0,0,0,0,GLFW_WINDOW);
-	glfwSetWindowTitle("PongGL");
+	glfwSetWindowTitle("Shazbot Pong");
 	glViewport(0,0,Width,Height);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();

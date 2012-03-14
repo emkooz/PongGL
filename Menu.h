@@ -7,12 +7,20 @@
 namespace NMenu
 {
 
+	static unsigned int Width , Height;
 
 class CMenu
 {
 public:
 	std::string State;
-	CMenu();
+	float x , y;
+
+	GLuint MenuImg;
+
+	CMenu(float , float);
+
+	void Draw();
+	void Update();
 	
 
 };
