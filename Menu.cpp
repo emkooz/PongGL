@@ -1,6 +1,7 @@
 #include "Menu.h"
 #include <glfw.h>
 #include <SOIL.h>
+#include <iostream>
 
 NMenu::CMenu::CMenu(float X , float Y)
 {
@@ -21,38 +22,43 @@ NMenu::CMenu::CMenu(float X , float Y)
 
 void NMenu::CMenu::Draw()
 {
-	glPushMatrix();
-	glTranslatef(x,y,0);
+	
 	glEnable(GL_TEXTURE_2D);
 	glBindTexture(GL_TEXTURE_2D , MenuImg); 
 	glBegin(GL_QUADS);
 
-		glTexCoord2f(0,0);
+		glTexCoord2f(0,1);
 		glVertex2f(0 , 0);
 		
-		glTexCoord2f(1,0);
+		glTexCoord2f(1,1);
 		glVertex2f(x,0);
 		
-		glTexCoord2f(1,1);
+		glTexCoord2f(1,0);
 		glVertex2f(x , y);
         
-		glTexCoord2f(0,1);
+		glTexCoord2f(0,0);
 		glVertex2f(0 , y);
 		
 		
 	
 	glEnd();
 	glDisable(GL_TEXTURE_2D);
-	glPopMatrix();
+	
 }
 
 void NMenu::CMenu::Update()
 {
 	glfwGetMousePos(&MouseX , &MouseY);
 
-	if (MouseX < 500 && MouseX > 300 && MouseY < 400 && MouseY > 306 && glfwGetMouseButton(GLFW_MOUSE_BUTTON_LEFT))
+	if (MouseX < 500 && MouseX > 300 && MouseY < 294 && MouseY > 200 && glfwGetMouseButton(GLFW_MOUSE_BUTTON_LEFT))
 	{
-		State = "Playing";
+		//std::cout << "\nMouseX: " << MouseX << "\nMouseY: " << MouseY;  (only enable for testing)
+			State = "Playing";
+	}
+
+	if (MouseX < 500 && MouseX > 300 && MouseY < 491 && MouseY > 399 && glfwGetMouseButton(GLFW_MOUSE_BUTTON_LEFT)) 
+	{
+		glfwCloseWindow();
 	}
 }
 

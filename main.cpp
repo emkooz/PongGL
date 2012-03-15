@@ -100,8 +100,7 @@ int main()
 		}
 
 		if (Menu.State == "Menu")
-		{
-			Menu.Draw();
+		{	
 			Menu.Update();
 		}
 
@@ -113,10 +112,17 @@ int main()
 		}
 		glClear(GL_COLOR_BUFFER_BIT);
 
+		if (Menu.State == "Menu")
+		{
+			Menu.Draw();
+		}
+
+		if (Menu.State == "Playing" || Menu.State == "Paused")
+		{
 		ball.Draw();
 		Player.Draw(); // draws
 		Enemy.Draw();
-
+		}
 		glfwSwapBuffers();
 	}
 
