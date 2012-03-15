@@ -14,6 +14,7 @@ class CMenu
 public:
 	std::string State;
 	float x , y;
+	int MouseX , MouseY;
 
 	GLuint MenuImg;
 

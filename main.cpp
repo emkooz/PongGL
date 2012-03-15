@@ -34,7 +34,7 @@ int main()
 		if (!sound)
 			return 0;
 
-	NMenu::CMenu Menu;
+	NMenu::CMenu Menu(Width , Height);
 
 	CScore score;
 
@@ -97,6 +97,12 @@ int main()
 		{
 			std::cout << "Window was closed! Exiting...\n";
 			exit(0);
+		}
+
+		if (Menu.State == "Menu")
+		{
+			Menu.Draw();
+			Menu.Update();
 		}
 
 		if (Menu.State == "Playing") // if the state is playing update everything

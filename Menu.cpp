@@ -2,7 +2,7 @@
 #include <glfw.h>
 #include <SOIL.h>
 
-NMenu::CMenu::CMenu(float X , float W)
+NMenu::CMenu::CMenu(float X , float Y)
 {
 	State = "Menu";
 	
@@ -48,7 +48,12 @@ void NMenu::CMenu::Draw()
 
 void NMenu::CMenu::Update()
 {
-	if (glfwGetMousePos() < 
+	glfwGetMousePos(&MouseX , &MouseY);
+
+	if (MouseX < 500 && MouseX > 300 && MouseY < 400 && MouseY > 306 && glfwGetMouseButton(GLFW_MOUSE_BUTTON_LEFT))
+	{
+		State = "Playing";
+	}
 }
 
 
