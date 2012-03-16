@@ -54,7 +54,7 @@ int main()
 	float LastTime = glfwGetTime(); // (for deltatime)
 	
 	
-	sound->play2D("sounds/song.ogg" , true);
+	
 
 	bool EscPressed = false; // thanks naelstrof
 	bool EscReleased = true;
@@ -74,14 +74,14 @@ int main()
 
 		if (EscPressed && !EscReleased) // if they press escape
 		{
-			if (Menu.State == "Playing") //if the state is playing
+			if (NMenu::State == "Playing") //if the state is playing
 			{
-				Menu.State = "Paused"; // change it to paused
+				NMenu::State = "Paused"; // change it to paused
 				std::cout <<"\n\n-----PAUSED-----\n\n";
 			}
 
-			else if (Menu.State == "Paused") // else if the state is paused
-				Menu.State = "Playing"; // change it to playing
+			else if (NMenu::State == "Paused") // else if the state is paused
+				NMenu::State = "Playing"; // change it to playing
 	
 			EscPressed = false;
 		}
@@ -99,25 +99,37 @@ int main()
 			exit(0);
 		}
 
-		if (Menu.State == "Menu")
+		if (NMenu::State == "Menu")
 		{	
 			Menu.Update();
+
+			if (NMenu::MusicState == "Playing")
+			{
+				sound->play2D("sounds/song.ogg" , true);
+			}
 		}
 
-		if (Menu.State == "Playing") // if the state is playing update everything
+		if (NMenu::State == "Playing") // if the state is playing update everything
 		{
 		ball.Update (DeltaTime);
+			if (NMenu::SoundState == "Shazbot")
+			{
+				sound->play2D ("sounds/shazbot.ogg" , true);
+				NMenu::SoundState = "\0";
+			}
+
+
 		Player.Update (DeltaTime); // update everything
 		Enemy.Update (DeltaTime);
 		}
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		if (Menu.State == "Menu")
+		if (NMenu::State == "Menu")
 		{
 			Menu.Draw();
 		}
 
-		if (Menu.State == "Playing" || Menu.State == "Paused")
+		if (NMenu::State == "Playing" || NMenu::State == "Paused")
 		{
 		Menu.BgDraw();
 		ball.Draw();

@@ -1,10 +1,10 @@
 #include "Paddle.h"
 #include <SOIL.h>
-#include <irrKlang.h>
 
 
 
-using namespace irrklang;
+
+
 using namespace Npad;
 
 Paddle::Paddle(float Y , float W)
@@ -115,6 +115,8 @@ void Paddle::Update(float DeltaTime)
 			CollisionBall->vx = (CollisionBall->x - x) * 5;
 			CollisionBall->vy *= -1;
 
+			NMenu::SoundState = "Shazbot";
+
 			if (CollisionBall->y > y)
 			{
 				CollisionBall->y = y + 40;
@@ -141,3 +143,4 @@ void Npad::SetCollisions (Nball::Ball* foo)
 {
 	CollisionBall = foo;
 }
+
