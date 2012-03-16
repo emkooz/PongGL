@@ -17,10 +17,12 @@ public:
 	int MouseX , MouseY;
 
 	GLuint MenuImg;
+	GLuint BgImg;
 
 	CMenu(float , float);
 
 	void Draw();
+	void BgDraw();
 	void Update();
 	
 

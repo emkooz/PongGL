@@ -2,6 +2,7 @@
 #include <glfw.h>
 #include <SOIL.h>
 #include <iostream>
+#include <irrKlang.h>
 
 NMenu::CMenu::CMenu(float X , float Y)
 {
@@ -10,6 +11,17 @@ NMenu::CMenu::CMenu(float X , float Y)
 	MenuImg = SOIL_load_OGL_texture
 	(
 		"img/menu.png",
+		SOIL_LOAD_AUTO,
+		SOIL_CREATE_NEW_ID,
+		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
+	);
+
+	x = X;
+	y = Y;
+
+	BgImg = SOIL_load_OGL_texture
+	(
+		"img/bg.png",
 		SOIL_LOAD_AUTO,
 		SOIL_CREATE_NEW_ID,
 		SOIL_FLAG_MIPMAPS | SOIL_FLAG_INVERT_Y | SOIL_FLAG_NTSC_SAFE_RGB | SOIL_FLAG_COMPRESS_TO_DXT
@@ -46,7 +58,32 @@ void NMenu::CMenu::Draw()
 	
 }
 
-void NMenu::CMenu::Update()
+void NMenu::CMenu::BgDraw()
+{
+	glEnable(GL_TEXTURE_2D);
+	glBindTexture(GL_TEXTURE_2D , BgImg); 
+	glBegin(GL_QUADS);
+
+		glTexCoord2f(0,1);
+		glVertex2f(0 , 0);
+		
+		glTexCoord2f(1,1);
+		glVertex2f(x,0);
+		
+		glTexCoord2f(1,0);
+		glVertex2f(x , y);
+        
+		glTexCoord2f(0,0);
+		glVertex2f(0 , y);
+		
+		
+	
+	glEnd();
+	glDisable(GL_TEXTURE_2D);
+	
+}
+
+void NMenu::CMenu::Update(ISoundEngine*)
 {
 	glfwGetMousePos(&MouseX , &MouseY);
 
@@ -54,6 +91,8 @@ void NMenu::CMenu::Update()
 	{
 		//std::cout << "\nMouseX: " << MouseX << "\nMouseY: " << MouseY;  (only enable for testing)
 			State = "Playing";
+
+			
 	}
 
 	if (MouseX < 500 && MouseX > 300 && MouseY < 491 && MouseY > 399 && glfwGetMouseButton(GLFW_MOUSE_BUTTON_LEFT)) 

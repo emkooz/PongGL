@@ -54,7 +54,7 @@ int main()
 	float LastTime = glfwGetTime(); // (for deltatime)
 	
 	
-	sound->play2D("sounds/song.mp3" , true);
+	sound->play2D("sounds/song.ogg" , true);
 
 	bool EscPressed = false; // thanks naelstrof
 	bool EscReleased = true;
@@ -119,6 +119,7 @@ int main()
 
 		if (Menu.State == "Playing" || Menu.State == "Paused")
 		{
+		Menu.BgDraw();
 		ball.Draw();
 		Player.Draw(); // draws
 		Enemy.Draw();
