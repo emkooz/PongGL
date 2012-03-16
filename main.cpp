@@ -6,7 +6,7 @@
 #include "Menu.h"
 #include "Score.h"
 
-using namespace irrklang;
+
 
 static unsigned int Width = 800;
 static unsigned int Height = 600;
@@ -29,10 +29,6 @@ int main()
 
 	glClearColor(0,0,1,1);
 
-	// start the sound engine with default parameters
- /*  ISoundEngine* sound = createIrrKlangDevice();
-		if (!sound)
-			return 0;*/
 
 	NMenu::CMenu Menu(Width , Height);
 
@@ -105,7 +101,7 @@ int main()
 
 			if (Menu.State == "Playing")
 			{
-				//sound->play2D("sounds/song.ogg" , true);
+				NSound::PlaySound("sounds/sound.ogg");
 			}
 		}
 
@@ -135,6 +131,6 @@ int main()
 		glfwSwapBuffers();
 	}
 
-	//sound->drop();
+	NSound::sound->drop();
 	return 0;
 }

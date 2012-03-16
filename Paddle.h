@@ -14,8 +14,6 @@ namespace Npad
     static Nball::Ball* CollisionBall;
     void SetCollisions(Nball::Ball*);
 
-	static ISoundEngine* PadSound;
-	void SetSound(ISoundEngine*);
 	
 
 class Paddle

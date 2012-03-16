@@ -5,12 +5,13 @@ using namespace irrklang;
 
 void NSound::PlaySound (const char* filename)
 {
-	if (!init)
+	if (!NSound::init)
 	{
-		init = true;
+		NSound::init = true;
 
-		sound = createIrrKlangDevice();
+		NSound::sound = createIrrKlangDevice();
 	}
 
-	sound->PlaySound(filename , true);
+	NSound::sound->play2D(filename , true);
 }
+
