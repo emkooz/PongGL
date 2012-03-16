@@ -115,7 +115,7 @@ void Paddle::Update(float DeltaTime)
 			CollisionBall->vx = (CollisionBall->x - x) * 5;
 			CollisionBall->vy *= -1;
 
-			NMenu::SoundState = "Shazbot";
+			
 
 			if (CollisionBall->y > y)
 			{

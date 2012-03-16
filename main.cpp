@@ -1,6 +1,6 @@
 #include <glfw.h>
 #include <iostream>
-#include <irrKlang.h>
+#include "Sound.h"
 #include "ball.h"
 #include "Paddle.h"
 #include "Menu.h"
@@ -30,9 +30,9 @@ int main()
 	glClearColor(0,0,1,1);
 
 	// start the sound engine with default parameters
-   ISoundEngine* sound = createIrrKlangDevice();
+ /*  ISoundEngine* sound = createIrrKlangDevice();
 		if (!sound)
-			return 0;
+			return 0;*/
 
 	NMenu::CMenu Menu(Width , Height);
 
@@ -74,14 +74,14 @@ int main()
 
 		if (EscPressed && !EscReleased) // if they press escape
 		{
-			if (NMenu::State == "Playing") //if the state is playing
+			if (Menu.State == "Playing") //if the state is playing
 			{
-				NMenu::State = "Paused"; // change it to paused
+				Menu.State = "Paused"; // change it to paused
 				std::cout <<"\n\n-----PAUSED-----\n\n";
 			}
 
-			else if (NMenu::State == "Paused") // else if the state is paused
-				NMenu::State = "Playing"; // change it to playing
+			else if (Menu.State == "Paused") // else if the state is paused
+				Menu.State = "Playing"; // change it to playing
 	
 			EscPressed = false;
 		}
@@ -99,24 +99,20 @@ int main()
 			exit(0);
 		}
 
-		if (NMenu::State == "Menu")
+		if (Menu.State == "Menu")
 		{	
 			Menu.Update();
 
-			if (NMenu::MusicState == "Playing")
+			if (Menu.State == "Playing")
 			{
-				sound->play2D("sounds/song.ogg" , true);
+				//sound->play2D("sounds/song.ogg" , true);
 			}
 		}
 
-		if (NMenu::State == "Playing") // if the state is playing update everything
+		if (Menu.State == "Playing") // if the state is playing update everything
 		{
 		ball.Update (DeltaTime);
-			if (NMenu::SoundState == "Shazbot")
-			{
-				sound->play2D ("sounds/shazbot.ogg" , true);
-				NMenu::SoundState = "\0";
-			}
+			
 
 
 		Player.Update (DeltaTime); // update everything
@@ -124,12 +120,12 @@ int main()
 		}
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		if (NMenu::State == "Menu")
+		if (Menu.State == "Menu")
 		{
 			Menu.Draw();
 		}
 
-		if (NMenu::State == "Playing" || NMenu::State == "Paused")
+		if (Menu.State == "Playing" || Menu.State == "Paused")
 		{
 		Menu.BgDraw();
 		ball.Draw();
@@ -139,6 +135,6 @@ int main()
 		glfwSwapBuffers();
 	}
 
-	sound->drop();
+	//sound->drop();
 	return 0;
 }

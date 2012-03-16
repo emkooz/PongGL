@@ -9,13 +9,13 @@ namespace NMenu
 
 	static unsigned int Width , Height;
 
-	static std::string State;
-	static std::string MusicState;
-	static std::string SoundState;
+	
+	
 
 class CMenu
 {
 public:
+	std::string State;
 	
 
 	float x , y;

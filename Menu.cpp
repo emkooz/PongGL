@@ -6,8 +6,8 @@
 
 NMenu::CMenu::CMenu(float X , float Y)
 {
-	NMenu::State = "Menu";
-	NMenu::SoundState = "\0";
+	State = "Menu";
+	
 	
 	MenuImg = SOIL_load_OGL_texture
 	(
@@ -91,8 +91,8 @@ void NMenu::CMenu::Update()
 	if (MouseX < 500 && MouseX > 300 && MouseY < 294 && MouseY > 200 && glfwGetMouseButton(GLFW_MOUSE_BUTTON_LEFT))
 	{
 		//std::cout << "\nMouseX: " << MouseX << "\nMouseY: " << MouseY;  (only enable for testing)
-			NMenu::State = "Playing";
-			NMenu::MusicState = "Playing";
+			State = "Playing";
+			
 
 			
 	}
