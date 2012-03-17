@@ -1,4 +1,5 @@
 #include "Paddle.h"
+#include "Sound.h"
 #include <SOIL.h>
 
 
@@ -115,8 +116,8 @@ void Paddle::Update(float DeltaTime)
 			CollisionBall->vx = (CollisionBall->x - x) * 5;
 			CollisionBall->vy *= -1;
 
+			NSound::PlaySound("sounds/shazbot.ogg" , false);
 			
-
 			if (CollisionBall->y > y)
 			{
 				CollisionBall->y = y + 40;

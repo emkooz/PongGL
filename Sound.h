@@ -7,8 +7,8 @@ namespace NSound //Gee, why didn't I think of this?
 {
 
 	static bool init = false;
-	irrklang::ISoundEngine* sound;
-	void PlaySound (const char* filename);
+	static irrklang::ISoundEngine* sound;
+	void PlaySound (const char* filename , bool foo);
 
 }
 

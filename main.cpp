@@ -101,7 +101,7 @@ int main()
 
 			if (Menu.State == "Playing")
 			{
-				NSound::PlaySound("sounds/sound.ogg");
+				NSound::PlaySound("sounds/song.ogg" , true);
 			}
 		}
 
